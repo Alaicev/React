@@ -1,0 +1,21 @@
+import React from "react"
+import s from "./Profile.css"
+import MyPosts from "./MyPosts/MyPosts"
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+
+
+const Profile = (props) => {
+
+
+    return (
+        <div className={s.profile}>
+            <ProfileInfo/>
+            <MyPosts posts={props.posts}
+                     newPostText={props.newPostText}
+                     addPost={props.addPost}
+                     changeNewPostText={props.changeNewPostText}/>
+        </div>
+    )
+}
+
+export default Profile
