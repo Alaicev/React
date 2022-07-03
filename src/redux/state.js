@@ -1,64 +1,69 @@
 let store = {
-
-}
-
-let rerender = () => {
-
-}
-
-let state = {
-    navBar: {
-        nav: [
-            {nameLink: "Profile", link: "/profile"},
-            {nameLink: "Message", link: "/dialogs"},
-            {nameLink: "News", link: "/news"},
-            {nameLink: "Music", link: "/music"},
-            {nameLink: "Settings", link: "/settings"}
-        ]
+    _state: {
+        navBar: {
+            nav: [
+                {nameLink: "Profile", link: "/profile"},
+                {nameLink: "Message", link: "/dialogs"},
+                {nameLink: "News", link: "/news"},
+                {nameLink: "Music", link: "/music"},
+                {nameLink: "Settings", link: "/settings"}
+            ]
+        },
+        profilePage: {
+            posts: [
+                {id: 1, message: "Hi"},
+                {id: 2, message: "Idi nah"},
+            ],
+            newPostText: ""
+        },
+        messagePage: {
+            dialogs: [
+                {id: 1, name: "Diman"},
+                {id: 2, name: "Sanya"},
+                {id: 3, name: "Andrey"},
+                {id: 4, name: "Roma"}
+            ],
+            messages: [
+                {id: 1, m: "Андрюшка прям заебал пиздец как"},
+                {id: 2, m: "Я его рот ебал!!!!!!"}
+            ]
+        }
     },
-    profilePage: {
-        posts: [
-            {id: 1, message: "Hi"},
-            {id: 2, message: "Idi nah"},
-        ],
-        newPostText: ""
+    getState() {
+        return this._state
     },
-    messagePage: {
-        dialogs: [
-            {id: 1, name: "Diman"},
-            {id: 2, name: "Sanya"},
-            {id: 3, name: "Andrey"},
-            {id: 4, name: "Roma"}
-        ],
-        messages: [
-            {id: 1, m: "Андрюшка прям заебал пиздец как"},
-            {id: 2, m: "Я его рот ебал!!!!!!"}
-        ]
-    }
-}
+    _rerender() {
 
-export let addPost = () => {
-    let newPost = {
-        id: state.profilePage.posts.length + 1,
-        message: state.profilePage.newPostText
-    }
-    if (state.profilePage.newPostText.length > 50) {
-        alert("Слишком большой текст")
-    } else {
-        state.profilePage.posts.push(newPost)
-        state.profilePage.newPostText = ""
-        rerender(state)
-    }
-}
+    },
+    subscribe(observer) {
+        this._rerender = observer
+    },
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost = {
+                id: this._state.profilePage.posts.length + 1,
+                message: this._state.profilePage.newPostText
+            }
+            if (this._state.profilePage.newPostText.length > 50) {
+                alert("Слишком большой текст")
+            } else {
+                this._state.profilePage.posts.push(newPost)
+                this._state.profilePage.newPostText = ""
+                this._rerender(this._state)
+            }
+        } else if (action.type === "CHANGE-NEW-POST") {
+            this._state.profilePage.newPostText = action.newText
+            this._rerender(this._state)
+        }
+    },
+    addPost() {
 
-export let changeNewPostText = (newText) => {
-    state.profilePage.newPostText = newText
-    rerender(state)
-}
-
-export const subscribe = (observer) => {
-    rerender = observer
+    },
+    changeNewPostText(newText) {
+        this._state.profilePage.newPostText = newText
+        this._rerender(this._state)
+    },
 }
 
 
-export default state
+export default store
