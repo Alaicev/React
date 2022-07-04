@@ -1,3 +1,7 @@
+const ADD_POST = "ADD-POST"
+const CHANGE_NEW_POST = "CHANGE-NEW-POST";
+
+
 let store = {
     _state: {
         navBar: {
@@ -39,30 +43,33 @@ let store = {
         this._rerender = observer
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: this._state.profilePage.posts.length + 1,
                 message: this._state.profilePage.newPostText
             }
-            if (this._state.profilePage.newPostText.length > 50) {
+            if (this._state.profilePage.newPostText.length > 20) {
                 alert("Слишком большой текст")
             } else {
                 this._state.profilePage.posts.push(newPost)
                 this._state.profilePage.newPostText = ""
                 this._rerender(this._state)
             }
-        } else if (action.type === "CHANGE-NEW-POST") {
+        } else if (action.type === CHANGE_NEW_POST) {
             this._state.profilePage.newPostText = action.newText
             this._rerender(this._state)
         }
-    },
-    addPost() {
+    }
+}
 
-    },
-    changeNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._rerender(this._state)
-    },
+export const addPostActionCreater = () => {
+    return{
+        type: ADD_POST
+    }
+}
+
+export const updateNewPostActionCreater = (text) => {
+    return {type: CHANGE_NEW_POST, newText: text}
 }
 
 
