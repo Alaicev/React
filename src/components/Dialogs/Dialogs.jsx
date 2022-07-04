@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
+import {addMessage, addNewMessage} from "../../redux/messages-reducer";
 
 
 
@@ -26,6 +27,17 @@ const Message = (props) => {
 const Dialogs = (props) => {
 
 
+    let addText = (e) => {
+        let text = e.target.value
+        let addText = addNewMessage(text)
+        props.dispatch(addText)
+    }
+
+    let addMessages = () => {
+        props.dispatch(addMessage())
+    }
+
+
     let dialogElement = props.dialogs.map( i => <DialogItem name={i.name} id={i.id} />);
     let messageElement = props.messages.map( i => <Message m={i.m} id={i.id} />)
 
@@ -36,6 +48,12 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messageList}>
                 {messageElement}
+            </div>
+            <div className={s.addMessage}>
+                <textarea name="message" id="" cols="100"
+                          onChange={ addText }
+                          value={props.newMessage} rows="2"></textarea>
+                <button onClick={addMessages}>Add message</button>
             </div>
         </div>
     )

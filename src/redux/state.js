@@ -1,6 +1,5 @@
-const ADD_POST = "ADD-POST"
-const CHANGE_NEW_POST = "CHANGE-NEW-POST";
-
+import profileReducer from "./profile-reducer";
+import messagesReducer from "./messages-reducer";
 
 let store = {
     _state: {
@@ -30,7 +29,8 @@ let store = {
             messages: [
                 {id: 1, m: "Андрюшка прям заебал пиздец как"},
                 {id: 2, m: "Я его рот ебал!!!!!!"}
-            ]
+            ],
+            newMessage: ""
         }
     },
     getState() {
@@ -43,33 +43,11 @@ let store = {
         this._rerender = observer
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: this._state.profilePage.posts.length + 1,
-                message: this._state.profilePage.newPostText
-            }
-            if (this._state.profilePage.newPostText.length > 20) {
-                alert("Слишком большой текст")
-            } else {
-                this._state.profilePage.posts.push(newPost)
-                this._state.profilePage.newPostText = ""
-                this._rerender(this._state)
-            }
-        } else if (action.type === CHANGE_NEW_POST) {
-            this._state.profilePage.newPostText = action.newText
-            this._rerender(this._state)
-        }
-    }
-}
 
-export const addPostActionCreater = () => {
-    return{
-        type: ADD_POST
+        profileReducer(this._state.profilePage, action)
+        messagesReducer(this._state.messagePage, action)
+        this._rerender()
     }
-}
-
-export const updateNewPostActionCreater = (text) => {
-    return {type: CHANGE_NEW_POST, newText: text}
 }
 
 
