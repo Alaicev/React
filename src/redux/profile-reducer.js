@@ -1,7 +1,15 @@
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST = "CHANGE-NEW-POST";
 
-const propfileReducer = (state, action) => {
+let initialStore = {
+    posts: [
+        {id: 1, message: "Hi"},
+        {id: 2, message: "Idi nah"},
+    ],
+    newPostText: ""
+}
+
+const propfileReducer = (state = initialStore, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
         case ADD_POST:

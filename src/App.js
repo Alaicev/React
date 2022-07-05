@@ -15,15 +15,15 @@ const App = (props) => {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <NavBar nav={props.state.navBar.nav}/>
+                <NavBar/>
                 <div className="app-wrapper-components">
                     <Routes>
                         <Route path="/dialogs/*" element={
-                            <Dialogs dialogs={props.state.messagePage.dialogs}
-                                     messages={props.state.messagePage.messages}
+                            <Dialogs dialogs={props.state.messagesPage.dialogs}
+                                     messages={props.state.messagesPage.messages}
                                      dispatch={props.dispatch}
-                                     newMessage={props.state.messagePage.newMessage}/> } />
-                        <Route path="/profile" element={
+                                     newMessage={props.state.messagesPage.newMessage}/> } />
+                        <Route path="/" element={
                             <Profile newPostText={props.state.profilePage.newPostText} dispatch={props.dispatch}
                                      posts={props.state.profilePage.posts}/>} />
                         <Route path="/news" element={<News />} />

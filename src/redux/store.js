@@ -5,7 +5,7 @@ let store = {
     _state: {
         navBar: {
             nav: [
-                {nameLink: "Profile", link: "/profile"},
+                {nameLink: "Profile", link: "/"},
                 {nameLink: "Message", link: "/dialogs"},
                 {nameLink: "News", link: "/news"},
                 {nameLink: "Music", link: "/music"},
