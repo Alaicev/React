@@ -16,7 +16,7 @@ let initialState = {
 }
 
 const messagesReducer = (state = initialState, action) => {
-
+    // eslint-disable-next-line default-case
     switch (action.type) {
         case NEW_MESSAGE:
             state.newMessage = action.text
@@ -26,8 +26,10 @@ const messagesReducer = (state = initialState, action) => {
                 id: state.messages.length + 1,
                 m: state.newMessage
             }
-            state.messages.push(newMessage)
-            state.newMessage = ""
+            if (state.newMessage !== "") {
+                state.messages.push(newMessage)
+                state.newMessage = ""
+            }
             break;
     }
     return state

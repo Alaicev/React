@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./redux/redux-store";
+import StoreContext from "./storeContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
     let callSubscribe = (props) => {
     root.render(
         <React.StrictMode>
-            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
-        </React.StrictMode>
+            <StoreContext.Provider value={store}>
+            <App/>
+            </StoreContext.Provider>
+            </React.StrictMode>
     );
 }
 

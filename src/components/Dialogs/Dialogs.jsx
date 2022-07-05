@@ -1,7 +1,6 @@
 import React from "react";
 import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
-import {addMessage, addNewMessage} from "../../redux/messages-reducer";
 
 
 
@@ -29,12 +28,11 @@ const Dialogs = (props) => {
 
     let addText = (e) => {
         let text = e.target.value
-        let addText = addNewMessage(text)
-        props.dispatch(addText)
+        props.addText(text)
     }
 
     let addMessages = () => {
-        props.dispatch(addMessage())
+        props.addMessages()
     }
 
 

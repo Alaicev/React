@@ -12,20 +12,18 @@ let initialStore = {
 const propfileReducer = (state = initialStore, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
+        case CHANGE_NEW_POST:
+            state.newPostText = action.newText
+            break;
         case ADD_POST:
             let newPost = {
                 id: state.posts.length + 1,
                 message: state.newPostText
             }
-            if (state.newPostText.length > 20) {
-                alert("Слишком большой текст")
-            } else {
+            if(state.newPostText !== '') {
                 state.posts.push(newPost)
                 state.newPostText = ""
             }
-            break;
-        case CHANGE_NEW_POST:
-            state.newPostText = action.newText
             break;
     }
     return state
