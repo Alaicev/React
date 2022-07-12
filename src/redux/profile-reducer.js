@@ -12,19 +12,24 @@ let initialStore = {
 const propfileReducer = (state = initialStore, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-        case CHANGE_NEW_POST:
-            state.newPostText = action.newText
-            break;
-        case ADD_POST:
+        case CHANGE_NEW_POST: {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
+            return stateCopy
+        }
+        case ADD_POST: {
             let newPost = {
                 id: state.posts.length + 1,
                 message: state.newPostText
             }
-            if(state.newPostText !== '') {
-                state.posts.push(newPost)
-                state.newPostText = ""
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            if (state.newPostText !== '') {
+                stateCopy.posts.push(newPost)
+                stateCopy.newPostText = ""
+                return stateCopy
             }
-            break;
+        }
     }
     return state
 }

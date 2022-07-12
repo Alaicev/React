@@ -3,12 +3,12 @@ import './App.css';
 import Profile from './components/content/Profile';
 import Header from './components/header/Header';
 import NavBar from './components/navbar/NavBar';
-import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 
 const App = (props) => {

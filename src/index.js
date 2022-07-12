@@ -4,22 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./redux/redux-store";
-import StoreContext from "./storeContext";
+
+import {Provider} from "react-redux";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-    let callSubscribe = (props) => {
     root.render(
         <React.StrictMode>
-            <StoreContext.Provider value={store}>
+            <Provider store={store}>
             <App/>
-            </StoreContext.Provider>
+            </Provider>
             </React.StrictMode>
     );
-}
-
-callSubscribe(store.getState())
-store.subscribe( callSubscribe )
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

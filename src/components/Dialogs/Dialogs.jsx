@@ -36,8 +36,8 @@ const Dialogs = (props) => {
     }
 
 
-    let dialogElement = props.dialogs.map( i => <DialogItem name={i.name} id={i.id} />);
-    let messageElement = props.messages.map( i => <Message m={i.m} id={i.id} />)
+    let dialogElement = props.messagePage.dialogs.map( i => <DialogItem name={i.name} id={i.id} key={i.id} />);
+    let messageElement = props.messagePage.messages.map( i => <Message m={i.m} id={i.id} key={i.id} />)
 
     return (
         <div className={s.dialogs}>
@@ -50,7 +50,7 @@ const Dialogs = (props) => {
             <div className={s.addMessage}>
                 <textarea name="message" id="" cols="100"
                           onChange={ addText }
-                          value={props.newMessage} rows="2"></textarea>
+                          value={props.messagePage.newMessage} rows="2"></textarea>
                 <button onClick={addMessages}>Add message</button>
             </div>
         </div>
