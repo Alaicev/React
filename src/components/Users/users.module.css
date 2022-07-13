@@ -1,0 +1,44 @@
+.container {
+    width: 90%;
+    background: #efefef;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image img {
+    width: 100px;
+    height: 100px;
+}
+
+.image {
+    grid-area: im;
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    grid-area: n;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.location {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.on {
+    background: #00ff00;
+}
+
+.off {
+    background: red;
+}
+
