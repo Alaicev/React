@@ -42,3 +42,16 @@
     background: red;
 }
 
+.pageActive {
+    font-weight: bold;
+}
+
+.pageNoActive {
+    font-weight: 200;
+}
+
+.nav span{
+    padding: 0 10px
+}
+
+

@@ -1,38 +1,15 @@
-import axios from "axios";
-
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
+const CURRENT_PAGE = "CURRENT-PAGE"
+const TOTAL_USERS = "TOTAL-USERS"
 
 
 let initialStore = {
-    users: [
-        // {
-        //     id: 1,
-        //     photo: "https://www.meme-arsenal.com/memes/639a19b1249a4f1d9df7baf2c7bbfb5b.jpg",
-        //     userName: "Dmitriy",
-        //     follower: true,
-        //     cite: "i am a boss",
-        //     location: {city: "Saratov", country: "Russia"}
-        // },
-        // {
-        //     id: 2,
-        //     photo: "http://sun9-48.userapi.com/impf/aQSkgtn1Fem9J4OAV2n38_8JEvP7jESLek6yog/KDzceDEnCQQ.jpg?size=604x453&quality=96&sign=4bae3199771b7cf8a608d6778c0a7068&type=album",
-        //     userName: "Roman",
-        //     follower: false,
-        //     cite: "vr ar",
-        //     location: {city: "Saratov", country: "Russia"}
-        // },
-        // {
-        //     id: 3,
-        //     photo: "https://madhunter.ru/wp-content/uploads/2019/11/SHakal-870x400.jpg",
-        //     userName: "Andrey",
-        //     follower: false,
-        //     cite: "llolo",
-        //     location: {city: "Saratov", country: "Russia"}
-        // }
-    ],
-    text: "text"
+    users: [],
+    pageSize: 10,
+    totalUserCount: 50,
+    currentPage: 4
 }
 
 
@@ -60,7 +37,11 @@ const usersReducer = (state = initialStore, action) => {
                 })
             }
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
+        case CURRENT_PAGE:
+            return {...state, currentPage: action.number}
+        case TOTAL_USERS:
+            return {...state, totalUserCount: action.number}
     }
     return state
 }
@@ -79,6 +60,12 @@ export const setUsersAC = (users) => {
     return {
         type: SET_USERS, users
     }
+}
+export const currentPageAC = (number) => {
+    return{type: CURRENT_PAGE, number}
+}
+export const totalUsersAC = (number) => {
+    return{type: TOTAL_USERS, number}
 }
 
 export default usersReducer
