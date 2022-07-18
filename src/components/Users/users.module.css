@@ -54,4 +54,19 @@
     padding: 0 10px
 }
 
+.imageAnimation {
+    animation-duration: 3s;
+    animation-name: logoRotate;
+}
+
+@keyframes logoRotate {
+    0% {
+    transform: rotate(0deg);
+}  50% {
+    transform: rotate(180deg);
+}  100% {
+    transform: rotate(360deg);
+}
+}
+
 
