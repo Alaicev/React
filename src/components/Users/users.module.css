@@ -51,7 +51,8 @@
 }
 
 .nav span{
-    padding: 0 10px
+    padding: 0 10px;
+    cursor: pointer;
 }
 
 .imageAnimation {

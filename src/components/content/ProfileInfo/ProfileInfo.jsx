@@ -1,14 +1,19 @@
 import React from "react"
+import Preloader from "../../common/preloader";
 
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if (!props.profile.profile) {
+        return <Preloader/>
+    }
     return (
         <div>
-          <img src="https://interier-foto.ru/wp-content/uploads/dlinnye-fotografii.jpg" alt="logo" />
-        <div className="profile">
-          <p>My profile</p>
+            <div className="profile">
+                <img src={props.profile.profile.photos.large} alt=""/>
+                <h2>{props.profile.profile.fullName}</h2>
+                <p>My profile</p>
+            </div>
         </div>
-      </div>
     )
 }
 
