@@ -3,11 +3,11 @@ import Header from "./Header";
 import axios from "axios";
 import {setUserData} from "../../redux/auth-peducer";
 import {connect} from "react-redux";
+import {Auth} from "../../api/api";
 
 class HeaderContainer extends React.Component{
     componentDidMount() {
-        axios
-            .get("https://social-network.samuraijs.com/api/1.0//auth/me", {withCredentials: true})
+        Auth()
             .then(data => {
                 if (data.data.resultCode === 0) {
                     let {id, email, login,} = data.data.data

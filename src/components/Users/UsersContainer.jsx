@@ -12,13 +12,13 @@ import axios from "axios";
 import AllUsers from "./AllUsers"
 import reactLogo from "./../../logo.svg"
 import s from "./users.module.css"
+import {getUsersAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/API/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        getUsersAPI(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(data.data.items)
@@ -30,8 +30,7 @@ class UsersAPIComponent extends React.Component {
     clickPage = (u) => {
         this.props.setCurrentPages(u)
         this.props.toggleIsFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/API/1.0/users?page=${u}&count=${this.props.pageSize}`)
+        getUsersAPI(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 this.props.setUsers(data.data.items)
                 this.props.toggleIsFetching(false)

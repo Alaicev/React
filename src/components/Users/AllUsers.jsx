@@ -15,7 +15,7 @@ const AllUsers = (props) => {
         <div className={s.nav}>
             {pages.filter(a => a === props.currentPage || a === props.currentPage + 1 || a === props.currentPage + 2 || a === props.currentPage - 1 || a === props.currentPage - 2)
                 .map(u =>
-                    <span className={props.currentPage === u && s.pageActive}
+                    <span key={u.id} className={props.currentPage === u && s.pageActive}
                           onClick={() => {
                               props.clickPage(u)
                           }}>{u}</span>
