@@ -1,3 +1,5 @@
+import {getUsersAPI} from "../api/api";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -23,7 +25,7 @@ const usersReducer = (state = initialStore, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userID) {
-                        return {...u, follower: true}
+                        return {...u, followed: true}
                     }
                     return u
                 })
@@ -33,7 +35,7 @@ const usersReducer = (state = initialStore, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userID) {
-                        return {...u, follower: false}
+                        return {...u, followed: false}
                     }
                     return u
                 })
@@ -66,13 +68,26 @@ export const setUsers = (users) => {
     }
 }
 export const setCurrentPages = (number) => {
-    return{type: CURRENT_PAGE, number}
+    return {type: CURRENT_PAGE, number}
 }
 export const setTotalUsers = (number) => {
-    return{type: TOTAL_USERS, number}
+    return {type: TOTAL_USERS, number}
 }
 export const toggleIsFetching = (isFetching) => {
-    return{type: TOGGLE_IS_FETCHING, isFetching}
+    return {type: TOGGLE_IS_FETCHING, isFetching}
+}
+
+export const getUsersThunkCreater = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        getUsersAPI(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.data.items))
+                dispatch(setTotalUsers(data.data.totalCount))
+            })
+
+    }
 }
 
 export default usersReducer
