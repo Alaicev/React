@@ -1,3 +1,4 @@
+import {profileAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST = "CHANGE-NEW-POST";
@@ -50,6 +51,14 @@ export const addPostActionCreater = () => {
 export const updateNewPostActionCreater = (text) => ({type: CHANGE_NEW_POST, newText: text})
 
 export const setUsersProfile =(Profile) =>({type:SET_USERS_PROPILE, Profile})
+
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI(userId)
+            .then(data =>
+                dispatch(setUsersProfile(data.data)))
+    }
+}
 
 
 export default propfileReducer

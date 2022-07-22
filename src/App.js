@@ -9,6 +9,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/content/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
+import Login from "./components/login/login";
 
 
 
@@ -32,6 +33,8 @@ const App = () => {
                             <Settings />} />
                         <Route path="/users" element={
                             <UsersContainer />} />
+                        <Route path="/login" element={
+                            <Login />} />
                     </Routes>
                 </div>
             </div>

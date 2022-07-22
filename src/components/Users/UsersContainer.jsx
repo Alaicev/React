@@ -1,10 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
-    unfollow,
     setCurrentPages,
-    getUsersThunkCreater,
+    getUsersThunkCreater, followUserThunkCreater, unFollowUserThunkCreater,
 } from "../../redux/Users-reducer";
 import AllUsers from "./AllUsers"
 import reactLogo from "./../../logo.svg"
@@ -24,14 +22,15 @@ class UsersAPIComponent extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={reactLogo} className={s.imageAnimation}/> :
+            {this.props.isFetching ? <img src={reactLogo} className={s.imageAnimation} alt="logo"/> :
                 <AllUsers currentPage={this.props.currentPage}
                           pageSize={this.props.pageSize}
                           totalUserCount={this.props.totalUserCount}
                           users={this.props.users}
                           clickPage={this.clickPage}
-                          follow={this.props.follow}
-                          unfollow={this.props.unfollow}
+                          followInProgress={this.props.followInProgress}
+                          followUserThunkCreater ={this.props.followUserThunkCreater}
+                          unFollowUserThunkCreater ={this.props.unFollowUserThunkCreater}
                 />
             }
         </>
@@ -45,15 +44,16 @@ let mapStateToProps = (state) => {
         pageSize: state.allUsersPage.pageSize,
         totalUserCount: state.allUsersPage.totalUserCount,
         currentPage: state.allUsersPage.currentPage,
-        isFetching: state.allUsersPage.isFetching
+        isFetching: state.allUsersPage.isFetching,
+        followInProgress: state.allUsersPage.followInProgress,
     }
 }
 
 
 const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
     setCurrentPages,
-    getUsersThunkCreater
+    getUsersThunkCreater,
+    followUserThunkCreater,
+    unFollowUserThunkCreater
 })(UsersAPIComponent)
 export default UsersContainer
