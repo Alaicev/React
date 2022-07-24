@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
+import {NavLink, Navigate} from "react-router-dom";
 
 
 
@@ -38,6 +38,10 @@ const Dialogs = (props) => {
 
     let dialogElement = props.messagePage.dialogs.map( i => <DialogItem name={i.name} id={i.id} key={i.id} />);
     let messageElement = props.messagePage.messages.map( i => <Message m={i.m} id={i.id} key={i.id} />)
+
+    if (props.auth === false) {
+        return <Navigate  to="/login" />
+    }
 
     return (
         <div className={s.dialogs}>

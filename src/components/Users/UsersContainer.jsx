@@ -7,6 +7,8 @@ import {
 import AllUsers from "./AllUsers"
 import reactLogo from "./../../logo.svg"
 import s from "./users.module.css"
+import withAuthRedirect from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersAPIComponent extends React.Component {
 
@@ -38,6 +40,9 @@ class UsersAPIComponent extends React.Component {
 }
 
 
+
+
+
 let mapStateToProps = (state) => {
     return {
         users: state.allUsersPage.users,
@@ -49,11 +54,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-
-const UsersContainer = connect(mapStateToProps, {
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
     setCurrentPages,
     getUsersThunkCreater,
     followUserThunkCreater,
     unFollowUserThunkCreater
-})(UsersAPIComponent)
-export default UsersContainer
+}),) (UsersAPIComponent)
