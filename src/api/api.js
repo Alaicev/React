@@ -34,3 +34,13 @@ export const profileAPI = (userId) => {
     return initial
         .get(`profile/${userId}`)
 }
+
+export const getStatus = (userId) => {
+    return initial
+        .get(`/profile/status/${userId}`)
+}
+
+export const updateStatus = (status) => {
+    return initial
+        .put(`/profile/status/`, {status:status})
+}

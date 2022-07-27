@@ -12,7 +12,6 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/login/login";
 
 
-
 const App = () => {
     return (
         <BrowserRouter>
@@ -22,19 +21,22 @@ const App = () => {
                 <div className="app-wrapper-components">
                     <Routes>
                         <Route path="/dialogs/*" element={
-                            <DialogsContainer /> } />
-                        <Route path="/:userId" element={
-                            <ProfileContainer/>} />
+                            <DialogsContainer/>}/>
+                        <Route path="/" element={
+                            <ProfileContainer/>}>
+                            <Route path=":userId" element={
+                                <ProfileContainer/>}/>
+                        </Route>
                         <Route path="/news" element={
-                            <News />} />
+                            <News/>}/>
                         <Route path="/music" element={
-                            <Music />} />
+                            <Music/>}/>
                         <Route path="/settings" element={
-                            <Settings />} />
+                            <Settings/>}/>
                         <Route path="/users" element={
-                            <UsersContainer />} />
+                            <UsersContainer/>}/>
                         <Route path="/login" element={
-                            <Login />} />
+                            <Login/>}/>
                     </Routes>
                 </div>
             </div>
