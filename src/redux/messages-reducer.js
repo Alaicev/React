@@ -1,4 +1,3 @@
-const NEW_MESSAGE = "NEW-MESSAGE"
 const ADD_MESSAGE = "ADD-MESSAGE"
 
 let initialState = {
@@ -12,22 +11,15 @@ let initialState = {
         {id: 1, m: "Андрюшка прям заебал пиздец как"},
         {id: 2, m: "Я его рот ебал!!!!!!"}
     ],
-    newMessage: ""
 }
 
 const messagesReducer = (state = initialState, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-        case NEW_MESSAGE: {
-            return  {
-                ...state,
-                newMessage: action.text
-            }
-        }
         case ADD_MESSAGE: {
             let newMessage = {
                 id: state.messages.length + 1,
-                m: state.newMessage
+                m: action.textMessage
             }
             return  {
                 ...state,
@@ -39,12 +31,9 @@ const messagesReducer = (state = initialState, action) => {
     return state
 }
 
-export const addNewMessage = (text) => {
-    return {type: NEW_MESSAGE, text: text}
-}
 
-export const addMessage = () => {
-    return {type: ADD_MESSAGE}
+export const addMessage = (textMessage) => {
+    return {type: ADD_MESSAGE, textMessage}
 }
 
 

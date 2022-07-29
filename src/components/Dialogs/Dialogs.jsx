@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Dialogs.module.css"
 import {NavLink, Navigate} from "react-router-dom";
+import {Form, Field} from "react-final-form";
 
 
 
@@ -26,13 +27,8 @@ const Message = (props) => {
 const Dialogs = (props) => {
 
 
-    let addText = (e) => {
-        let text = e.target.value
-        props.addText(text)
-    }
-
-    let addMessages = () => {
-        props.addMessages()
+    let addMessages = (textMessage) => {
+        props.addMessages(textMessage)
     }
 
 
@@ -52,10 +48,18 @@ const Dialogs = (props) => {
                 {messageElement}
             </div>
             <div className={s.addMessage}>
-                <textarea name="message" id="" cols="100"
-                          onChange={ addText }
-                          value={props.messagePage.newMessage} rows="2"></textarea>
-                <button onClick={addMessages}>Add message</button>
+                <Form onSubmit={data => {addMessages(data.textarea)}}
+                render={({handleSubmit}) => (
+                    <form onSubmit={handleSubmit}>
+                        <Field name={"textarea"} component={"textarea"}/>
+                        <button>Push message</button>
+                    </form>
+                )}
+                />
+                {/*<textarea name="message" id="" cols="100"*/}
+                {/*          onChange={ addText }*/}
+                {/*          value={props.messagePage.newMessage} rows="2"></textarea>*/}
+                {/*<button onClick={addMessages}>Add message</button>*/}
             </div>
         </div>
     )

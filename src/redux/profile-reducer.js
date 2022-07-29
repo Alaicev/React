@@ -1,7 +1,6 @@
 import {getStatus, profileAPI, updateStatus} from "../api/api";
 
 const ADD_POST = "ADD-POST"
-const CHANGE_NEW_POST = "CHANGE-NEW-POST";
 const SET_USERS_PROPILE = "SET-USERS-PROPILE"
 const SET_USER_STATUS = "SET_USER_STATUS"
 
@@ -24,21 +23,15 @@ const propfileReducer = (state = initialStore, action) => {
                 ...state,
                 userProfile: {...action.Profile}
             }
-        case CHANGE_NEW_POST:
-            return {
-                ...state,
-                newPostText: action.newText
-            }
         case ADD_POST:
             let newPost = {
                 id: state.posts.length + 1,
-                message: state.newPostText
+                message: action.textPost
             }
-            if (state.newPostText !== "") {
+            if (action.textPost !== "") {
                 return {
                     ...state,
                     posts: [...state.posts, newPost],
-                    newPostText: ""
                 }
             }
         case SET_USER_STATUS:
@@ -50,13 +43,13 @@ const propfileReducer = (state = initialStore, action) => {
     return state
 }
 
-export const addPostActionCreater = () => {
+export const addPostActionCreater = (textPost) => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        textPost
     }
 }
 
-export const updateNewPostActionCreater = (text) => ({type: CHANGE_NEW_POST, newText: text})
 
 export const setUserStatusAC = (status) => ({type: SET_USER_STATUS, status})
 
