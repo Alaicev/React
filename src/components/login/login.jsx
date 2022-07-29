@@ -1,9 +1,11 @@
 import React from "react";
+import LoginForm from "./loginForm";
 
 const Login = (props) => {
     return (
         <div>
-            <h2>Login</h2>
+            <h1>Login</h1>
+            <LoginForm />
         </div>
     )
 }

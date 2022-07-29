@@ -9,9 +9,11 @@ class ProfileStatus extends React.Component{
     }
 
     activateEditMod = () => {
-        this.setState({
-            editMode: true,
-        })
+        if (this.props.userId === undefined) {
+            this.setState({
+                editMode: true,
+            })
+        }
     }
 
     deActivateEditMod = () => {
@@ -27,12 +29,13 @@ class ProfileStatus extends React.Component{
         })
     }
 
+
     render() {
         return (
             <>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMod}>{this.state.status}</span>
+                        <span onDoubleClick={this.activateEditMod}>{this.state.status || "Status"}</span>
                     </div>
                 }
                 {this.state.editMode &&
@@ -40,11 +43,7 @@ class ProfileStatus extends React.Component{
                         <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActivateEditMod} type="text" value={this.state.status}/>
                     </div>
                 }
-                {this.state.status === null &&
-                    <div>
-                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActivateEditMod} type="text" value={this.state.status}/>
-                    </div>
-                }
+
             </>
         )
     }

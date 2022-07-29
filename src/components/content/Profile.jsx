@@ -10,7 +10,7 @@ const Profile = (props) => {
     return (
         <div className={s.profile}>
             <img src="https://interier-foto.ru/wp-content/uploads/dlinnye-fotografii.jpg" alt="logo" />
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} userId={props.userId} myId={props.myId}/>
             <MyPostsContainer/>
         </div>
     )
