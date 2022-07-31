@@ -17,15 +17,15 @@ export function withRouter(Children) {
 }
 
 class ProfileContainer extends React.Component {
+
+
     componentDidMount() {
-        let usersId = this.props.match.params.userId
-        if (!usersId){
-            usersId = this.props.myUserId
-        }
+        let usersId = this.props.match.params.userId?this.props.match.params.userId:this.props.myUserId
         this.props.getUserProfile(usersId)
         this.props.setUserStatus(usersId)
 
     }
+
 
     render() {
         return (
@@ -44,6 +44,6 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
-    // withAuthRedirect,
+    withAuthRedirect,
     connect(mapStateToProps, { getUserProfile , setUserStatus, apdateStatus})
 ) (ProfileContainer)

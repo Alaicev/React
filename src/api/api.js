@@ -44,3 +44,13 @@ export const updateStatus = (status) => {
     return initial
         .put(`/profile/status/`, {status:status})
 }
+
+export const loginMe = (email, password, rememberMe = false) => {
+    return initial
+        .post("auth/login", {email, password, rememberMe})
+}
+
+export const logaut = () => {
+    return initial
+        .delete("auth/login")
+}

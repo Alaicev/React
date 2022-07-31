@@ -49,17 +49,30 @@ const Dialogs = (props) => {
             </div>
             <div className={s.addMessage}>
                 <Form onSubmit={data => {addMessages(data.textarea)}}
+                      validate={values => {
+                          const errors = {}
+                        if (!values.textarea) {
+                            errors.textarea = "None text"
+                        }
+                        else if (values.textarea.length > 20) {
+                            errors.textarea = "Max length 20 "
+                        }
+                        return errors
+                      }}
                 render={({handleSubmit}) => (
                     <form onSubmit={handleSubmit}>
-                        <Field name={"textarea"} component={"textarea"}/>
+                        <Field name={"textarea"}>
+                            {({input, meta}) => (
+                                <div>
+                                    <input {...input} type="text" placeholder={"message"}/>
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
                         <button>Push message</button>
                     </form>
                 )}
                 />
-                {/*<textarea name="message" id="" cols="100"*/}
-                {/*          onChange={ addText }*/}
-                {/*          value={props.messagePage.newMessage} rows="2"></textarea>*/}
-                {/*<button onClick={addMessages}>Add message</button>*/}
             </div>
         </div>
     )
