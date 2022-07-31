@@ -12,7 +12,7 @@ let initialStore = {
     ],
     newPostText: "",
     userProfile:null,
-    status:""
+    status:"",
 }
 
 const propfileReducer = (state = initialStore, action) => {

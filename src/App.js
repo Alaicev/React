@@ -10,38 +10,56 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/content/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/login/login";
+import {connect} from "react-redux";
+import {Initialize} from "./redux/app-peducer";
+import Preloader from "./components/common/preloader";
 
 
-const App = () => {
-    return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <NavBar/>
-                <div className="app-wrapper-components">
-                    <Routes>
-                        <Route path="/dialogs/*" element={
-                            <DialogsContainer/>}/>
-                        <Route path="/" element={
-                            <ProfileContainer/>}>
-                            <Route path=":userId" element={
-                                <ProfileContainer/>}/>
-                        </Route>
-                        <Route path="/news" element={
-                            <News/>}/>
-                        <Route path="/music" element={
-                            <Music/>}/>
-                        <Route path="/settings" element={
-                            <Settings/>}/>
-                        <Route path="/users" element={
-                            <UsersContainer/>}/>
-                        <Route path="/login" element={
-                            <Login/>}/>
-                    </Routes>
+class App extends React.Component {
+
+    componentDidMount() {
+        this.props.Initialize()
+    }
+
+
+    render() {
+        if (!this.props.isInitialised) {
+            return <Preloader />
+        }
+        return (
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <HeaderContainer/>
+                    <NavBar/>
+                    <div className="app-wrapper-components">
+                        <Routes>
+                            <Route path="/dialogs/*" element={
+                                <DialogsContainer/>}/>
+                            <Route path="/" element={
+                                <ProfileContainer/>}>
+                                <Route path=":userId" element={
+                                    <ProfileContainer/>}/>
+                            </Route>
+                            <Route path="/news" element={
+                                <News/>}/>
+                            <Route path="/music" element={
+                                <Music/>}/>
+                            <Route path="/settings" element={
+                                <Settings/>}/>
+                            <Route path="/users" element={
+                                <UsersContainer/>}/>
+                            <Route path="/login" element={
+                                <Login/>}/>
+                        </Routes>
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
-};
+            </BrowserRouter>
+        );
+    }
+}
 
-export default App;
+let mapStateToProps = (state) => ({
+    isInitialised: state.appReducer.isInitialised
+})
+
+export default connect (mapStateToProps , {Initialize}) (App);

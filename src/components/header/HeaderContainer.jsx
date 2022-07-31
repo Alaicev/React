@@ -4,9 +4,6 @@ import {authMeCreater, Logout, setUserData} from "../../redux/auth-peducer";
 import {connect} from "react-redux";
 
 class HeaderContainer extends React.Component{
-    componentDidMount() {
-        this.props.authMeCreater()
-    }
 
     render() {
         return <Header auth={this.props.auth} logout={this.props.Logout}/>
@@ -19,4 +16,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect (mapStateToProps, {setUserData, authMeCreater, Logout}) (HeaderContainer)
+export default connect (mapStateToProps, {setUserData, Logout}) (HeaderContainer)

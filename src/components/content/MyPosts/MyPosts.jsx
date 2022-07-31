@@ -16,7 +16,7 @@ const MyPosts = (props) => {
 
     return (
         <div className={s.posts}>
-            <Form onSubmit={(data) => addPost(data.textarea)}
+            <Form onSubmit={(data) => data.textarea? addPost(data.textarea): null}
                   render={({handleSubmit}) => (
                       <form onSubmit={handleSubmit}>
                           <Field component={"textarea"} name={"textarea"} />
