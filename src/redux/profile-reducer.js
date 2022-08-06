@@ -1,7 +1,7 @@
 import {getStatus, profileAPI, updateStatus} from "../api/api";
 
 const ADD_POST = "ADD-POST"
-const SET_USERS_PROPILE = "SET-USERS-PROPILE"
+const SET_USERS_PROFILE = "SET-USERS-PROFILE"
 const SET_USER_STATUS = "SET_USER_STATUS"
 
 
@@ -15,10 +15,10 @@ let initialStore = {
     status:"",
 }
 
-const propfileReducer = (state = initialStore, action) => {
+const profileReducer = (state = initialStore, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-        case SET_USERS_PROPILE:
+        case SET_USERS_PROFILE:
             return {
                 ...state,
                 userProfile: {...action.Profile}
@@ -53,7 +53,7 @@ export const addPostActionCreater = (textPost) => {
 
 export const setUserStatusAC = (status) => ({type: SET_USER_STATUS, status})
 
-export const setUsersProfile =(Profile) =>({type:SET_USERS_PROPILE, Profile})
+export const setUsersProfile =(Profile) =>({type:SET_USERS_PROFILE, Profile})
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
@@ -82,4 +82,4 @@ export const apdateStatus = (status) => {
 }
 
 
-export default propfileReducer
+export default profileReducer
