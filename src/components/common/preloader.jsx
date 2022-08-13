@@ -5,7 +5,8 @@ import s from "../Users/users.module.css";
 let Preloader = (props) => {
     return (
         <div>
-            <img src={reactLogo} className={s.imageAnimation} alt={""} />
+            <img src={reactLogo} className={s.imageAnimation} alt={"lol"} />
+            <p>Подождите</p>
         </div>
     )
 }

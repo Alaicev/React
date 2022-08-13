@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 const Header = (props) => {
     return (
         <header className="header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" width="50" height="50px"alt="logo"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" width="50" height="50px" alt="logo"/>
             <div>
                 {props.auth.isAuth?
                     <div>

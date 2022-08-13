@@ -11,8 +11,8 @@ let initialStore = {
         {id: 2, message: "Idi nah"},
     ],
     newPostText: "",
-    userProfile:null,
-    status:"",
+    userProfile: null,
+    status: "",
 }
 
 const profileReducer = (state = initialStore, action) => {
@@ -31,9 +31,9 @@ const profileReducer = (state = initialStore, action) => {
             if (action.textPost !== "") {
                 return {
                     ...state,
-                    posts: [...state.posts, newPost],
+                    posts: [...state.posts, newPost]
                 }
-            }
+            } break
         case SET_USER_STATUS:
             return {
                 ...state,
@@ -53,31 +53,30 @@ export const addPostActionCreater = (textPost) => {
 
 export const setUserStatusAC = (status) => ({type: SET_USER_STATUS, status})
 
-export const setUsersProfile =(Profile) =>({type:SET_USERS_PROFILE, Profile})
+export const setUsersProfile = (Profile) => ({type: SET_USERS_PROFILE, Profile})
 
 export const getUserProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI(userId)
-            .then(data =>
-                dispatch(setUsersProfile(data.data)))
+    return async (dispatch) => {
+        let response = await profileAPI(userId)
+        dispatch(setUsersProfile(response.data))
     }
 }
 
 export const setUserStatus = (userId) => {
-    return (dispatch) => {
-        getStatus(userId)
-            .then(responce => dispatch(setUserStatusAC(responce.data)))
+    return async (dispatch) => {
+        let response = await getStatus(userId)
+        dispatch(setUserStatusAC(response.data))
     }
 }
 
 export const apdateStatus = (status) => {
-    return (dispatch) => {
-        updateStatus(status)
-            .then(responce => {
-                if (responce.data.resultCode===0) {
-                    dispatch(setUserStatusAC(status))
-                }
-            })
+    return async (dispatch) => {
+        let response = await updateStatus(status)
+
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatusAC(status))
+        }
+
     }
 }
 

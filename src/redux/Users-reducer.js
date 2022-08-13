@@ -86,44 +86,50 @@ export const toggleIsFollowing = (propgess) => {
 
 
 export const getUsersThunkCreater = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true))
-        getUsersAPI(currentPage, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.data.items))
-                dispatch(setTotalUsers(data.data.totalCount))
-            })
+        let response = await getUsersAPI(currentPage, pageSize)
+
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(response.data.items))
+        dispatch(setTotalUsers(response.data.totalCount))
+
 
     }
 }
 
+
 export const followUserThunkCreater = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
+        let methodAPI =followingAPI.bind(followingAPI)
+        let methodAction = follow
+
         dispatch(toggleIsFollowing(true))
-        followingAPI(userId)
-            .then(response =>{
-                if (response.data.resultCode === 0) {
-                    dispatch(follow(userId))
-                }
-                dispatch(toggleIsFollowing(false))
-            })
+        let response = await methodAPI(userId)
+
+        if (response.data.resultCode === 0) {
+            dispatch(methodAction(userId))
+        }
+        dispatch(toggleIsFollowing(false))
+
     }
 }
 
 export const unFollowUserThunkCreater = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
+        let methodAPI =unfollowingAPI.bind(followingAPI)
+        let methodAction = unfollow
+
         dispatch(toggleIsFollowing(true))
-        unfollowingAPI(userId)
-            .then(response =>{
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollow(userId))
-                }
-                dispatch(toggleIsFollowing(false))
-            })
+        let response = await methodAPI(userId)
+
+        if (response.data.resultCode === 0) {
+            dispatch(methodAction(userId))
+        }
+        dispatch(toggleIsFollowing(false))
+
     }
 }
-
 
 
 export default usersReducer

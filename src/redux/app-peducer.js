@@ -22,7 +22,7 @@ export const appInitialised = () => {
     return {type:INITIALIZER}
 }
 
-export const Initialize = () => (dispatch) => {
+export const Initialize = () => async (dispatch) => {
     let promis = dispatch(authMeCreater())
     promis.then(() => dispatch(appInitialised()))
 }
