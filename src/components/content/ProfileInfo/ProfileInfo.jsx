@@ -1,7 +1,6 @@
 import React from "react"
 import Preloader from "../../common/preloader";
 import ProfileImage from "./../../../assets/images/149071.png"
-import ProfileStatus from "./status/profileStatus";
 import ProfileStatusHooks from "./status/profileStatusHocks";
 
 
